@@ -1,2 +1,2 @@
-# chip8-off-the-old-block
-okay google, what's a classic and probably overdone rust project?
+# Chip8 Off The Old Block
+Learning rust by creating a chip8 emulator.
