@@ -1,3 +1,6 @@
+// Program associated with creating and testing the CPU needed for a 
+// chip8 emulator.
+
 // Create a cpu struct that matches chip8 specs.
 struct CPU {
     // 16 8-bit register array, single reserved bit.
@@ -19,6 +22,7 @@ struct CPU {
 
 // Create an impl for instantiation.
 impl CPU {
+    // TODO Docs
     fn new() -> CPU {
         CPU {
             regi:[0;16],
@@ -32,21 +36,33 @@ impl CPU {
         }
     }
 
-    // Load a program. Data starts at 0x200.
-    fn load_prog(&mut self, prog:Vec<u8>) {
-        let prog_data = &mut vec![0; 0x200];
-        for current_byte in prog {
-            prog_data.push(i);
+    // TODO Docs 
+    pub fn cycle(&mut self) {
+        // TODO Implement -> this should just go to the next u16 value in the program
+        // self.get_next_opcode();
+        // TODO Implement -> this should use a switch and fn implementations for each value
+        // self.execute_opcode();
+        // TODO handle delays.
+        // self.execute_delay();
+    }
+
+    // TODO Docs
+    fn load_program(&mut self, input_data: Vec<u8>) {
+        let mut data = vec![0; 0x200];
+        // TODO might need to add some padding here.
+        for byte in input_data {
+            data.push(byte)
         }
-        for (current_addr, &current_byte) in prog_data.iter().enumerate() {
-            self.memory[current_addr] = current_byte;
+        for (index, &byte) in data.iter().enumerate() {
+            self.memory[index] = byte;
         }
-    }      
+    }
+    
 }    
 
 // Instantiate using the main function.
 fn main() {
     let cpu = &mut CPU::new();
-    cpu.load(vec![0x13, 0xC5]);
 }
 
+// TODO Add tests! 
