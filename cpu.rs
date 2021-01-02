@@ -38,12 +38,17 @@ impl CPU {
 
     // TODO Docs 
     pub fn cycle(&mut self) {
-        // TODO Implement -> this should just go to the next u16 value in the program
-        // self.get_next_opcode();
+        self.get_next_opcode();
         // TODO Implement -> this should use a switch and fn implementations for each value
         // self.execute_opcode();
         // TODO handle delays.
         // self.execute_delay();
+    }
+
+    // Sets the cpu's opcode attribute to the next 16-bit opcode in the program
+    // (based on the current program counter attribute).
+    fn get_next_opcode(&mut self) {
+        self.opcode = (self.memory[self.pc] as u16) << 8 | (self.memory[self.pc + 1] as u16);
     }
 
     // TODO Docs
@@ -58,6 +63,20 @@ impl CPU {
         }
     }
     
+    fn execute_opcode(&mut self) {
+        match self.opcode & 0xf000 {
+            // TODO add all of the opcodes and functions associated with them.
+            _      => self.opcode_not_implemented()
+        }
+    }
+
+    // Print to the console if a specified opcode has no implementation.
+    // Exit after printing the value of the problematic opcode.
+    fn opcode_not_implemented(&self) {
+        println!("Specified opcode {:X} has no implementation. Exiting.", self.opcode);
+        process::exit(0);
+    }
+
 }    
 
 // Instantiate using the main function.
